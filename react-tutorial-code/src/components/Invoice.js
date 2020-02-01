@@ -12,5 +12,5 @@ class InvoiceCard extends React.Component{
         );
     }
 }
-
+// usage: <InvoiceCard number="30112354" amount={15} currency="$" dateCreated={new Date().toString()} />
 export default InvoiceCard;
