@@ -3,7 +3,24 @@ import "./InvoicesList.css";
 import InvoiceCard from "./InvoiceCard";
 class InvoicesList extends React.Component {
     state = {
-        invoices: [
+      loadingData: false,
+      invoices: []
+    };
+
+    componentDidMount(){
+      this.fetchInvoices();
+    }
+
+    fetchInvoices(){
+      this.setState({
+        loadingData: true
+      });
+      
+      setTimeout(() => {
+        console.log('fetching data');
+        this.setState({
+          loadingData: false,
+          invoices: [
             {
                 id: "3216547",
                 accountId: "264578",
@@ -25,8 +42,10 @@ class InvoicesList extends React.Component {
                 currency: "EUR",
                 dateCreated: new Date()
             }
-        ]
-    };
+          ]
+        });
+      }, 1500);
+    }
 
     getInvoicesCards() {
         return this.state.invoices.map(invoice => (
@@ -51,6 +70,7 @@ class InvoicesList extends React.Component {
                 >
                     Invoices
                 </h1>
+                {this.state.loadingData ? 'Loading...' : null}
                 {this.getInvoicesCards()}
             </div>
         );
