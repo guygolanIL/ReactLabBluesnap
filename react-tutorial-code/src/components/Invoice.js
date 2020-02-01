@@ -6,7 +6,7 @@ class Invoice extends React.Component{
         return (
             <div className="invoice-card">
                 <div><b>Invoice Number: </b>{this.props.number}</div>
-                <div><b>Date Created: </b>{this.props.dateCreated.toString()}</div>
+                <div><b>Date Created: </b>{this.props.dateCreated}</div>
             </div>
         );
     }

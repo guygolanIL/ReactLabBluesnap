@@ -5,7 +5,7 @@ import './App.css';
 function App() {
 
   return (
-    <Invoice number="3000002" dateCreated={new Date()}></Invoice>
+    <Invoice number="3000002" dateCreated={new Date().toString()}></Invoice>
   );
 }
 
