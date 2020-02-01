@@ -2,10 +2,10 @@ import React from "react";
 import "./InvoiceCard.css";
 const InvoiceCard = props => (
     <div className="invoice-card">
-        <div><b>Invoice Id: </b>{props.id}</div>
-        <div><b>Amount: </b>{props.amount}{props.currency}</div>
-        <div><b>Date Created: </b>{props.dateCreated}</div>
-        <div><b>Account Id: </b>{props.accountId}</div>
+        <div><b>id: </b>{props.id}</div>
+        <div><b>amount: </b>{props.amount}{props.currency}</div>
+        <div><b>date created: </b>{props.dateCreated}</div>
+        <div><b>account id: </b>{props.accountId}</div>
     </div>
 );
 
