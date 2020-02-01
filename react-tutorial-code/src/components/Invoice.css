@@ -1,10 +1,10 @@
 .invoice-card {
-    border-color: black;
+    border-color: #c8c8c8;
     display: inline-block;
+    border-width: 1px 1px 1px 1px;
     border-radius: 8px;
-    border-style: hidden;
+    border-style: solid;
     margin: 2px;
     padding: 20px;
     box-shadow: 3px 3px 8px 0px #c8c8c8;
-
 }
