@@ -1,12 +1,13 @@
 import React from 'react';
-import Invoice from './components/Invoice';
+import InvoiceCard from './components/Invoice';
 import './App.css';
 
-function App() {
-
-  return (
-    <Invoice number="3000002" dateCreated={new Date().toString()}></Invoice>
-  );
+class App extends React.Component {
+  render(){
+    return (
+      <InvoiceCard number="3000002" amount={15} currency='$' dateCreated={new Date().toString()}></InvoiceCard>
+    );
+  }
 }
 
 export default App;
