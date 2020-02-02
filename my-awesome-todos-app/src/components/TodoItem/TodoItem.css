@@ -1,0 +1,11 @@
+.TodoItem{
+    border-color: #c8c8c8;
+    background-color: #ffffff;
+    display: block;
+    border-width: 1px 1px 1px 1px;
+    border-radius: 8px;
+    border-style: solid;
+    margin: 10px;
+    padding: 20px;
+    box-shadow: 3px 3px 8px 0px #c8c8c8;
+}

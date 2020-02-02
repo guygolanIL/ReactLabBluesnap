@@ -1,0 +1,10 @@
+.TodoList{
+    margin: auto;
+    display: block;
+    max-width: 30%;
+}
+
+.Title{
+    text-align: center;
+    color: cornflowerblue;
+}
