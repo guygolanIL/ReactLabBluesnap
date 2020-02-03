@@ -9,11 +9,25 @@ class TodoList extends React.Component {
         todos: []
     };
 
-    getTodosItems() {
-        return this.state.todos.map(todo => (<TodoItem key={todo.id} title={todo.title}></TodoItem>));
+    removeTodoHandler(todoId) {
+        console.log(`removing todo with id: ${todoId}`)
+        this.setState({
+            todos: this.state.todos.filter(todo => todo.id !== todoId)
+        });
     }
 
-    todoCreateHandler(newTodo) {
+    getTodosItems() {
+        return this.state.todos.map(todo => (
+            <TodoItem
+                key={todo.id}
+                title={todo.title}
+                onClick={() => {
+                    this.removeTodoHandler(todo.id);
+                }}>
+            </TodoItem>));
+    }
+
+    todoCreateHandler = (newTodo) => {
         this.setState({
             todos: [...this.state.todos, newTodo]
         });
@@ -23,9 +37,7 @@ class TodoList extends React.Component {
         return (
             <div className="TodoList">
                 <h1 className="Title">My Todo List</h1>
-                <TodoCreator onCreate={(newTodo) => {
-                    this.todoCreateHandler(newTodo);
-                }} />
+                <TodoCreator onCreate={this.todoCreateHandler}/>
                 {this.getTodosItems()}
             </div>
         );

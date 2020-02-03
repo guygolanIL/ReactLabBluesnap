@@ -9,3 +9,8 @@
     padding: 20px;
     box-shadow: 3px 3px 8px 0px #c8c8c8;
 }
+
+.TodoItem:hover{
+    background-color: cornflowerblue;
+    color: white;
+}
