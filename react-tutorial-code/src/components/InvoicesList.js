@@ -5,7 +5,7 @@ import {InvoicesCurrencyFilter } from "./InvoicesCurrencyFilter";
 
 class InvoicesList extends React.Component {
     state = {
-        currency: null,
+        currency: "USD",
         invoices: 
             [
                 {

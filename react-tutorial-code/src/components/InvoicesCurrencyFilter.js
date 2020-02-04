@@ -1,16 +1,15 @@
 import React from "react";
 
-export const InvoicesCurrencyFilter = props => {
-    return (
-        <div>
-            <select 
-                onChange={(e) => {
-                    props.onSelected(e.target.value)
-                }}>
-                <option value="USD">USD</option>
-                <option value="ILS">ILS</option>
-                <option value="EUR">EUR</option>
-            </select>
-        </div>
-    );
-};
+export const InvoicesCurrencyFilter = props => (
+    <div>
+        <select
+            onChange={e => {
+                props.onSelected(e.target.value);
+            }}
+        >
+            <option value="USD">USD</option>
+            <option value="ILS">ILS</option>
+            <option value="EUR">EUR</option>
+        </select>
+    </div>
+);
