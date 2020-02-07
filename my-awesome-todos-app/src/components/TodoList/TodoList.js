@@ -1,47 +1,47 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import TodoItem from '../TodoItem/TodoItem';
 import TodoCreator from '../TodoCreator/TodoCreator';
 import "./TodoList.css"
 
-class TodoList extends React.Component {
+const TodoListReducer = (oldState, action) => {
+    switch(action.type) {
+        case 'removeTodoWithId': 
+        console.log(`removing todo with id: ${action.id}`)
+        return {
+            todos: oldState.todos.filter(todo => todo.id !== action.id)
+        }
 
-    state = {
-        todos: []
-    };
+        case 'addTodo':
+            return {
+                ...oldState,
+                todos: [...oldState.todos, action.newTodo]
+            }
 
-    removeTodoHandler(todoId) {
-        console.log(`removing todo with id: ${todoId}`)
-        this.setState({
-            todos: this.state.todos.filter(todo => todo.id !== todoId)
-        });
+        default: 
+        return {
+            ...oldState
+        }
     }
+};
 
-    getTodosItems() {
-        return this.state.todos.map(todo => (
-            <TodoItem
-                key={todo.id}
-                title={todo.title}
-                onClick={() => {
-                    this.removeTodoHandler(todo.id);
-                }}>
-            </TodoItem>));
-    }
+const  TodoList = (props) => {
 
-    todoCreateHandler = (newTodo) => {
-        this.setState({
-            todos: [...this.state.todos, newTodo]
-        });
-    }
+    const [state, dispatch] = useReducer(TodoListReducer, {todos: []});
 
-    render() {
         return (
             <div className="TodoList">
                 <h1 className="Title">My Todo List</h1>
-                <TodoCreator onCreate={this.todoCreateHandler}/>
-                {this.getTodosItems()}
+                <TodoCreator onCreate={newTodo => dispatch({ type: 'addTodo', newTodo }) }/>
+                {
+                    state.todos.map(todo => (
+                        <TodoItem
+                            key={todo.id}
+                            title={todo.title}
+                            onClick={() => dispatch({ type: 'removeTodoWithId', id: todo.id})}>
+                        </TodoItem>))
+                }
             </div>
         );
-    }
 }
 
 export default TodoList;

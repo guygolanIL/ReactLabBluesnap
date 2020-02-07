@@ -1,55 +1,73 @@
-import React from 'react';
+import React, { useReducer } from "react";
 import "./TodoCreator.css";
 
-class TodoCreator extends React.Component {
+const initialState = {
+    newTodoTitle: "",
+    newTodoId: 0
+};
 
-    state = {
-        newTodoTitle: '',
-        newTodoId: 0
+const TodoCreatorReducer = (oldState, action) => {
+    switch (action.type) {
+        case "titleChange":
+            return {
+                ...oldState,
+                newTodoTitle: action.title
+            };
+
+        case "createNewTodo":
+            return {
+                ...oldState,
+                newTodoTitle: "",
+                newTodoId: oldState.newTodoId + 1
+            };
+
+        default:
+            return { ...oldState };
     }
+};
 
-    render() {
-        return (
-            <div className="TodoCreator">
+const TodoCreator = props => {
+    const [state, dispatch] = useReducer(TodoCreatorReducer, initialState);
 
-                <div style={{
-                    margin: 'auto'
-                }}>
-                    <input
-                        type="text"
-                        className="TodoInput"
-                        placeholder="Title"
-                        value={this.state.newTodoTitle}
-                        onChange={(e) => {
-                            this.setState({
-                                newTodoTitle: e.target.value
-                            });
-                        }}
-                    />
+    return (
+        <div className="TodoCreator">
+            <div
+                style={{
+                    margin: "auto"
+                }}
+            >
+                <input
+                    type="text"
+                    className="TodoInput"
+                    placeholder="Title"
+                    value={state.newTodoTitle}
+                    onChange={e =>
+                        dispatch({ type: "titleChange", title: e.target.value })
+                    }
+                />
 
-                    <button className="AddButton" onClick={() => {
-                        if (this.state.newTodoTitle) {
+                <button
+                    className="AddButton"
+                    onClick={() => {
+                        if (state.newTodoTitle) {
                             const newTodo = {
-                                id: this.state.newTodoId,
-                                title: this.state.newTodoTitle
-                            }
-                            this.setState({
-                                newTodoId: this.state.newTodoId + 1
-                            }, () => {
-                                console.log(`created new todo: `, newTodo);
-                                this.props.onCreate(newTodo);
-                                this.setState({
-                                    newTodoTitle: ''
-                                })
+                                id: state.newTodoId,
+                                title: state.newTodoTitle
+                            };
+                            console.log(`created new todo: `, newTodo);
+                            props.onCreate(newTodo);
+
+                            dispatch({
+                                type: "createNewTodo"
                             });
                         }
-                    }}>
-                        ADD
-                    </button>
-                </div>
+                    }}
+                >
+                    ADD
+                </button>
             </div>
-        );
-    }
-}
+        </div>
+    );
+};
 
 export default TodoCreator;
