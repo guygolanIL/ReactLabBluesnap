@@ -7,6 +7,7 @@ export const InvoicesCurrencyFilter = props => (
                 props.onSelected(e.target.value);
             }}
         >
+            <option value="">ALL</option>
             <option value="USD">USD</option>
             <option value="ILS">ILS</option>
             <option value="EUR">EUR</option>
