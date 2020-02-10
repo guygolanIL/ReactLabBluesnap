@@ -5,7 +5,7 @@ import { InvoicesCurrencyFilter } from "./InvoicesCurrencyFilter";
 
 class InvoicesList extends React.Component {
     state = {
-        currency: "",
+        selectedCurrency: "",
         invoices: [
             {
                 id: "3216547",
@@ -32,30 +32,27 @@ class InvoicesList extends React.Component {
     };
 
     render() {
-        let filteredInvoices = this.state.invoices;
-
-        if (this.state.currency) {
-            filteredInvoices = filteredInvoices.filter(
-                invoice => invoice.currency === this.state.currency
-            );
-        }
-
-        filteredInvoices = filteredInvoices.map(invoice => (
-            <InvoiceCard
-                key={invoice.id}
-                id={invoice.id}
-                accountId={invoice.accountId}
-                amount={invoice.amount}
-                currency={invoice.currency}
-                dateCreated={invoice.dateCreated.toString()}
-            />
-        ));
+        const filteredInvoices = this.state.invoices
+            .filter(invoice => {
+                if (this.state.selectedCurrency === "") return true;
+                return invoice.currency === this.state.selectedCurrency;
+            })
+            .map(invoice => (
+                <InvoiceCard
+                    key={invoice.id}
+                    id={invoice.id}
+                    accountId={invoice.accountId}
+                    amount={invoice.amount}
+                    currency={invoice.currency}
+                    dateCreated={invoice.dateCreated.toString()}
+                />
+            ));
 
         return (
             <div className="InvoicesList">
                 <InvoicesCurrencyFilter
                     onSelected={currency => {
-                        this.setState({ currency: currency });
+                        this.setState({ selectedCurrency: currency });
                     }}
                 />
                 {filteredInvoices}
